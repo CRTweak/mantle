@@ -14,6 +14,7 @@ function menu.draw()
     --Menu Opts
     
     for k,v in ipairs(opts) do
+        opts[2] = "CRT Effect: "..Mantle.crtEffectValue
         local textw = font:getWidth(v)
         local x = (width - textw)/2
         local starty = 20
@@ -56,11 +57,13 @@ function menu.keypressed(key)
         end
         ui_conf:play()
     elseif key == "left" and selected == 2 then
-        Mantle.crtEffectValue = math.max(0, Mantle.crtEffectValue-1)
-        print("CRT Level: "..Mantle.crtEffectValue)
+        ui_tick:stop()
+        ui_tick:play()
+        Mantle.crtEffectValue = math.max(0, (Mantle.crtEffectValue or 0) -1)
     elseif key == "right" and selected == 2 then
-        Mantle.crtEffectValue = math.max(0, Mantle.crtEffectValue+1)
-        print("CRT Level: "..Mantle.crtEffectValue)
+        ui_tick:stop()
+        ui_tick:play()
+        Mantle.crtEffectValue = math.min(100, (Mantle.crtEffectValue or 0) +1)
     end
 end
 

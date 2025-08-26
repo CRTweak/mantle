@@ -1,2 +1,7 @@
+v0.0.2
 Added States.
 Can now quit the menu, and also quit from options.
+
+v0.0.3
+Added CRT Shader. It applies only to text, and we find this weird. (Libre is stuck on this)
+-Need to fix.

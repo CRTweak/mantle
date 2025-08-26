@@ -7,6 +7,7 @@ local selected = 1
 local opts = {"Start", "Load", "Options", "Quit"}
 
 function menu.draw()
+    
     --setup for title
     local text = "MANTLE"
     local font = love.graphics.newFont("assets/fonts/main.ttf", 144)

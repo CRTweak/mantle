@@ -1,30 +1,33 @@
 Mantle = {}
+Mantle.crtShader = love.graphics.newShader("assets/shaders/crt.glsl")
 Mantle.currentState = require("menu_main")
 
 function love.load()
     local crtShader
-    love.window.setTitle("MANTLE v0.0.2")
+    love.window.setTitle("MANTLE v0.0.3")
     SCREEN_WIDTH, SCREEN_HEIGHT = love.graphics.getWidth(), love.graphics.getHeight()
 
-    Mantle.crtEffectValue = 0 --default
-    crtShader = love.graphics.newShader("assets/shaders/crt.glsl")
-    Mantle.crtShader = crtShader
+    Mantle.crtEffectValue = Mantle.crtEffectValue or 0 --default
 
     if Mantle.currentState.activate then Mantle.currentState.activate() end
+    
     ui_tick = love.audio.newSource("assets/sounds/ui_tick.wav", "static")
     ui_conf = love.audio.newSource("assets/sounds/ui_conf.wav", "static")
     local menuMusic = love.audio.newSource("assets/music/menu.mp3", "stream")
     menuMusic:play()
     menuMusic:setVolume(0.5)
+    if not Mantle.screenCanvas then
+        Mantle.screenCanvas = love.graphics.newCanvas()
+    end
 end
-
-local selected = 1
-local opts = {"Start", "Load", "Options", "Quit"}
 
 function love.draw()
     if Mantle.crtShader then
-        Mantle.crtShader:send("intensity", Mantle.crtEffectValue / 100)
+        Mantle.crtShader:send("intensity", Mantle.crtEffectValue)
         love.graphics.setShader(Mantle.crtShader)
+        love.graphics.setColor(0.7, 0.7, 0.7)
+        love.graphics.rectangle("fill",0,0,SCREEN_WIDTH, SCREEN_HEIGHT)
+        love.graphics.setColor(1,1,1)
     end
 
     if Mantle.currentState and Mantle.currentState.draw then
