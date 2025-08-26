@@ -4,6 +4,7 @@ function menu.activate()
     --this
 end
 local selected = 1
+
 local opts = {"Frame Rate", "CRT Effect", "Return To Main"}
 
 function menu.draw()
@@ -54,6 +55,12 @@ function menu.keypressed(key)
             if menu.activate then menu.activate() end
         end
         ui_conf:play()
+    elseif key == "left" and selected == 2 then
+        Mantle.crtEffectValue = math.max(0, Mantle.crtEffectValue-1)
+        print("CRT Level: "..Mantle.crtEffectValue)
+    elseif key == "right" and selected == 2 then
+        Mantle.crtEffectValue = math.max(0, Mantle.crtEffectValue+1)
+        print("CRT Level: "..Mantle.crtEffectValue)
     end
 end
 

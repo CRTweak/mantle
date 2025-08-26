@@ -2,10 +2,15 @@ Mantle = {}
 Mantle.currentState = require("menu_main")
 
 function love.load()
+    local crtShader
     love.window.setTitle("MANTLE v0.0.2")
     SCREEN_WIDTH, SCREEN_HEIGHT = love.graphics.getWidth(), love.graphics.getHeight()
-    if Mantle.currentState.activate then Mantle.currentState.activate() end
 
+    Mantle.crtEffectValue = 0 --default
+    crtShader = love.graphics.newShader("assets/shaders/crt.glsl")
+    Mantle.crtShader = crtShader
+
+    if Mantle.currentState.activate then Mantle.currentState.activate() end
     ui_tick = love.audio.newSource("assets/sounds/ui_tick.wav", "static")
     ui_conf = love.audio.newSource("assets/sounds/ui_conf.wav", "static")
     local menuMusic = love.audio.newSource("assets/music/menu.mp3", "stream")
@@ -17,8 +22,17 @@ local selected = 1
 local opts = {"Start", "Load", "Options", "Quit"}
 
 function love.draw()
+    if Mantle.crtShader then
+        Mantle.crtShader:send("intensity", Mantle.crtEffectValue / 100)
+        love.graphics.setShader(Mantle.crtShader)
+    end
+
     if Mantle.currentState and Mantle.currentState.draw then
         Mantle.currentState.draw()
+    end
+
+    if Mantle.crtShader then
+        love.graphics.setShader()
     end
     ----setup for title
     --local text = "MANTLE"
