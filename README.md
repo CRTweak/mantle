@@ -6,4 +6,4 @@ TO DO:
 - CRT Filter (shader shit eww)
 - Stop referencing Kristal
 - Working Map & Player
-  Hopefully also a functioning UI
+- - Hopefully also a functioning UI
