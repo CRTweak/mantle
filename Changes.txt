@@ -4,4 +4,7 @@ Can now quit the menu, and also quit from options.
 
 v0.0.3
 Added CRT Shader. It applies only to text, and we find this weird. (Libre is stuck on this)
--Need to fix.
+
+v0.1
+Map Render, fixed CRT shader.
+Need to add player.
