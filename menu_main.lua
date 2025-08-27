@@ -19,14 +19,14 @@ function menu.draw()
     
     --Menu Opts
     for k,v in ipairs(opts) do
-        love.graphics.setFont(love.graphics.newFont("assets/fonts/main.ttf", 48))
+        love.graphics.setFont(love.graphics.newFont("assets/fonts/main.ttf", 32))
     
         if k == selected then
             love.graphics.setColor(1,1,0)
         else
             love.graphics.setColor(1,1,1)
         end
-        love.graphics.print(v, 100, 360 + (k-1)*48)
+        love.graphics.print(v, 60, 300 + (k-1)*32)
         love.graphics.setColor(1,1,1)
     end
 end
@@ -51,7 +51,11 @@ function menu.keypressed(key)
         print("Selected (Cur count is "..selected..")")
     --other keypress args
     elseif key == "z" then
-        if selected == 3 then
+        if selected == 1 then
+            local map_loading = require("menu_map_loading")
+            Mantle.currentState = map_loading
+            if map_loading.activate then map_loading.activate() end
+        elseif selected == 3 then
             local options = require("menu_options")
             Mantle.currentState = options
             if options.activate then options.activate() end
