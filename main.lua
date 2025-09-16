@@ -1,11 +1,23 @@
 Mantle = {}
 Mantle.crtShader = love.graphics.newShader("assets/shaders/crt.glsl")
 Mantle.currentState = require("menu_main")
+json = require("libs.json")
+configdata = love.filesystem.read("config.json")
+Loader = require("utils.loader")
+_Class  = require("libs.hump.class")
+Class = require("utils.class")
+Object = require("engine.common.object")
+ActorSprite = require("engine.common.actorsprite")
+Actor = require("engine.common.data.actor")
+Sprite = require("engine.objects.sprite")
+
+config = json.decode(configdata)
+
 
 function love.load()
     SCREEN_WIDTH, SCREEN_HEIGHT = love.graphics.getWidth(), love.graphics.getHeight()
 
-    Mantle.crtEffectValue = Mantle.crtEffectValue or 0 --default
+    Mantle.crtEffectValue = Mantle.crtEffectValue or config.config.shader --default
 
     if Mantle.currentState.activate then Mantle.currentState.activate() end
 

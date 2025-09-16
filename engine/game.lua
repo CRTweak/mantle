@@ -1,7 +1,7 @@
 local game = {}
-
+local player
 function game.activate()
-    print("TLOADEDDDD")
+    print("this bih loaded")
 end
 
 function game.setMap(map)

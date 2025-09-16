@@ -8,7 +8,7 @@ function map_loading.activate()
     map_loading.loaded = false
     map_loading.error = nil
 
-    local success, mapOrError = pcall(sti, "assets/maps/room1.lua")
+    local success, mapOrError = pcall(sti, config.config.map_start)
     if success and mapOrError then
         map_loading.map = mapOrError
         map_loading.loaded = true
